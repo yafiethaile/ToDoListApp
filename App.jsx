@@ -18,10 +18,7 @@ import {
 
 import {
   Colors,
-  DebugInstructions,
   Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 import ToDoList from './ToDoList'; // Import the ToDoList component
@@ -33,6 +30,13 @@ function App() {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  // Define a state variable for the list of tasks and initialize it with hard-coded tasks
+  const [tasks, setTasks] = useState([
+    'Do laundry',
+    'Go to gym',
+    'Walk dog',
+  ]);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -48,20 +52,8 @@ function App() {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="ToDo List">
-            <ToDoForm /> {/* Render the ToDoForm component */}
-            <ToDoList /> {/* Render the ToDoList component */}
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          <ToDoForm tasks={tasks} setTasks={setTasks} /> {/* Render the ToDoForm component and pass the tasks and setTasks as props */}
+          <ToDoList tasks={tasks} /> {/* Render the ToDoList component and pass the tasks as props */}
         </View>
       </ScrollView>
     </SafeAreaView>
