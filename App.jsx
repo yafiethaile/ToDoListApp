@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,33 +24,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-
-
-function Section({children, title}) {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import ToDoList from './ToDoList'; // Import the ToDoList component
+import ToDoForm from './ToDoForm'; // Import the ToDoForm component
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -73,9 +48,9 @@ function App() {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.jsx</Text> to change this
-            screen and then come back to see your edits.
+          <Section title="ToDo List">
+            <ToDoForm /> {/* Render the ToDoForm component */}
+            <ToDoList /> {/* Render the ToDoList component */}
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
@@ -106,9 +81,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
   },
 });
 
