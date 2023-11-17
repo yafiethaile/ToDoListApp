@@ -38,6 +38,11 @@ function App() {
     'Walk dog',
   ]);
 
+  //Implements the addTask function to update the state of the function
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -52,7 +57,7 @@ function App() {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <ToDoForm tasks={tasks} setTasks={setTasks} /> {/* Render the ToDoForm component and pass the tasks and setTasks as props */}
+          <ToDoForm addTask={addTask} setTasks={setTasks} /> {/* Render the ToDoForm component and pass the tasks and setTasks as props */}
           <ToDoList tasks={tasks} /> {/* Render the ToDoList component and pass the tasks as props */}
         </View>
       </ScrollView>
