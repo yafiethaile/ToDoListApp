@@ -21,10 +21,17 @@ import {
   Header,
 } from 'react-native/Libraries/NewAppScreen';
 
-import ToDoList from './ToDoList'; // Import the ToDoList component
-import ToDoForm from './ToDoForm'; // Import the ToDoForm component
+import ToDoList from './android/ToDoList'; // Import the ToDoList component
+import ToDoForm from './android/app/src/components/ToDoForm'; // Import the ToDoForm component
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
 
 function App() {
+  
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -44,6 +51,13 @@ function App() {
   };
 
   return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home">
+          {(props) => <HomeScreen {...props} tasks={tasks} addTask={addTask} setTasks={setTasks} />}
+        </Stack.Screen>
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -62,6 +76,7 @@ function App() {
         </View>
       </ScrollView>
     </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
